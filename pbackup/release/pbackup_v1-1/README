@@ -1,0 +1,1 @@
+pbackup is a PowerShell utility for backing up projects into zip files based on a configuration file. It supports path inclusion, exclusion, flattening, and preserving empty directories.
