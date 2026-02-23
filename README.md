@@ -14,3 +14,11 @@ These are personal tools developed for specific workflows. Use at your own risk.
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+### Attribution
+
+* **Author:** Sebastian Mass
+
+* **GitHub:** [vatofichor](https://github.com/vatofichor)
+
+* **Requirement:** The copyright notice and license must remain with the software in its parts or whole. This is a non-viral license; it does not apply to your entire product, only to the code sourced from this repository.
