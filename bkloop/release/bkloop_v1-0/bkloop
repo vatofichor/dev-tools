@@ -1,0 +1,6 @@
+#!/bin/bash
+# bkloop launcher
+# "vatofichor - Sebastian Mass"
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(cygpath -w "$SCRIPT_DIR/bkloop.ps1")" "$@"
