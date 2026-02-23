@@ -6,6 +6,7 @@ Collection of tools I use in my development workflows.
 
 * **bkloop** (`bkloop/release/bkloop_v1-0`): A backup scheduler for pbackup, use while actively working.
 * **pbackup** (`pbackup/release/pbackup_v1-1`): A backup utility designed for developers and AI agents.
+* **tinygit** (`tinygit/release/tinygit_v1-1`): A lightweight, local version control system for pbackup.
 
 ## Usage
 
