@@ -1,4 +1,4 @@
-# Ruleset: Optimized for Vatofichor & Antigravity (Export Template)
+# Ruleset
 
 This document outlines the Global Ruleset. Always approach the scenario with the goal to maximize **Logic-Density** while minimizing **Token-Overhead**, ensuring the agent acts with the proactivity of a senior engineer while staying strictly within operational safety bounds.
 
