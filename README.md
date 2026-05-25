@@ -4,6 +4,7 @@ Collection of tools I use in my development workflows.
 
 ## Tools
 
+* **Agentic Workflow Spec** (`vatofichors_agentic_workflow_spec.md`): A comprehensive framework for Agentic AI development, detailing the custom rules, sandboxing, and persistent state management used to drive all projects.
 * **bkloop** (`bkloop/release/bkloop_v1-0`): A backup scheduler for pbackup, use while actively working.
 * **pbackup** (`pbackup/release/pbackup_v1-1`): A backup utility designed for developers and AI agents.
 * **tinygit** (`tinygit/release/tinygit_v1-1`): A lightweight, local version control system for pbackup.
