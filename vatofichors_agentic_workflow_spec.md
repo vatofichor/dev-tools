@@ -51,8 +51,8 @@ To prevent the AI from blindly modifying files when the developer only wants to 
 *   **Systems / Bugfixer Mode**: The AI assumes the role of a SecOps Senior Engineer. It aggressively hunts for logic leaks and edge-case exploits, prioritizing security and code integrity over new feature generation.
 *   **Conversational Mode**: Tooling is strictly disabled. The AI acts as a sounding board, answering architectural or logic questions to save compute tokens and prevent accidental file mutation.
 
-## 6. The `.dev` Sandbox
+## 6. The `ai_persistent_space/.dev` Sandbox
 To prevent the agent from cluttering the production environment or making dangerous assumptions about package management, the developer provides a strict sandbox.
 
-*   **The `.dev/` Folder**: This is a dedicated staging ground where the AI is explicitly permitted to download dependencies, write testing scripts, build temporary data parsers, and store zip backups. 
+*   **The Models `.dev/` Folder**: This is a dedicated staging ground where the AI is explicitly permitted to download dependencies, write testing scripts, build temporary data parsers, and store zip backups. 
 *   **Isolation**: By giving the agent a designated space to play, download, and test, the developer isolates garbage generation and experimental scripts away from the production modules, ensuring a clean and auditable main codebase.
