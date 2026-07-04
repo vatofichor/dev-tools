@@ -242,12 +242,14 @@ Every generated `survey_*.md` must be constructed using the following template:
 - **Activation Phrases**: A bughounding session is explicitly initiated by the HIL using activation phrases: `bughound`, `bughounding`, `bughounding mode`, or `bughound mode`.
 - **Mode Distinction**: The keyword prefix `-hound` or suffix `-hounding` **must** be present to distinguish it from standard **Bugfixer Mode**. If the intent is ambiguous (e.g., standard `bugfixer mode` vs. `bughound mode`), the model **must** immediately initiate a HIL Survey to clarify.
 - **Trigger Scenario**: Typically activated when the HIL submits extensive code reviews, or when there are more than 4 obvious, complex, or interconnected bugs on hand.
+- **Mode Encapsulation**: Bughounding Mode encapsulates and orchestrates all other operating modes (Administrative/Doc Mode, Bugfixer Mode, and Planning Mode) throughout the duration of the session, remaining active as a parameter-run configuration until explicitly closed by the HIL or until all compiled bugs are resolved.
 
 ### 2. The Bughounding Record (`bughounding.md`)
 - **Initialization**: Upon entering a bughounding session, the model must immediately create a master compilation file:
   `[TEMPLATE_PERSISTENCE_DIR]/bughounding.md`
 - **File Role**: This file serves as the singular source of truth for tracking, investigating, and documenting the active bug catalog. It **does not** replace local execution plans or `[TEMPLATE_TASK_FILE]` checklists used during execution runs.
 - **Workspace Hygiene**: In this mode, the model must operate strictly in **Administrative Mode (Doc Mode) + Bugfixer Mode (Senior Dev Hat)**. Unless explicitly instructed by the HIL, the model **must not** mutate any active codebase files. Creating scratch/test files in `[TEMPLATE_PERSISTENCE_DIR]/dev/` to aid the investigation is allowed and encouraged.
+- **Historic Integrity**: Never delete historical directories within the AI space (e.g., `[TEMPLATE_PERSISTENCE_DIR]/dev/`, `[TEMPLATE_PERSISTENCE_DIR]/old/`). These folders serve as essential historic context, proof-of-concept models, and records of activity to support future developer recreation and research.
 - **Authority**: The file `bughounding.md` is fully under the control of the model.
 
 ### 3. Execution Lifecycle (The Bughounding Loop)
@@ -260,7 +262,8 @@ Every generated `survey_*.md` must be constructed using the following template:
      - *Phase Designation*: Bugfixing phase runs are designated by the HIL, denotatively specifying which parts/bugs of `bughounding.md` to plan.
      - *Normal Mode Transition*: If the HIL explicitly prompts the model to switch to **Normal Mode** to begin, the model starts execution immediately. Otherwise, the model halts and waits for HIL review and approval of the plan/tasks as standard. This grants the HIL developer control over token budgets and scope size.
 5. **Execution Run (Bugfixer Mode)**: Switch to **Bugfixer Mode (Senior Dev Hat)** and sequentially complete the tasks in the approved implementation plan.
-6. **Loop Termination**: Continue this loop until the HIL designates the session is complete, or all compiled bugs are resolved.
+6. **Walkthrough Compilation**: Instead of recreating a new walkthrough file for each task/run, maintain a single, cumulative walkthrough compilation file (`walkthrough.md`) for the entire session. New walkthrough details must be appended to the end of the existing file rather than overwriting it.
+7. **Loop Termination**: Continue this loop until the HIL designates the session is complete, or all compiled bugs are resolved.
 
 ### 4. Surveying and Phase Feedback
 - **Logic & Architectural Shift**: If a proposed fix requires a design, architectural, or mechanical alteration that alters features or user-facing behavior in a recognizable way, the model **must** halt execution and utilize the **Survey Protocol (Section 13)** (`survey_[desc].md`).
