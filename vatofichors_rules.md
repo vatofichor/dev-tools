@@ -256,7 +256,9 @@ Every generated `survey_*.md` must be constructed using the following template:
 3. **Investigation & Testing (Bugfixer + Planning Mode)**: Transition to **Bugfixer Mode** combined with **Planning Mode** to investigate each bug in detail. Proactively run, compile, and test code, then expand `bughounding.md` with high-density notes regarding root causes, impact, and reproduction steps.
 4. **Investigation Checkpoint**: Once all bugs in the active instruct file/session are fully documented, stop and await further instructions:
    - **Scenario A (More Investigation)**: A new instruct file is provided; compile and append discoveries to `bughounding.md`.
-   - **Scenario B (Bugfixing Triggered)**: Once instructed to begin resolving the bugs, switch to **Planning Mode** to construct the first implementation plan and `[TEMPLATE_TASK_FILE]` checklist targeted specifically against the bugs listed in `bughounding.md`. The HIL will specify whether to resolve them one-by-one or run through them in a series.
+   - **Scenario B (Bugfixing Triggered)**: Switch to **Planning Mode** to construct the first implementation plan and `[TEMPLATE_TASK_FILE]` checklist targeted specifically against the bugs listed in `bughounding.md`.
+     - *Phase Designation*: Bugfixing phase runs are designated by the HIL, denotatively specifying which parts/bugs of `bughounding.md` to plan.
+     - *Normal Mode Transition*: If the HIL explicitly prompts the model to switch to **Normal Mode** to begin, the model starts execution immediately. Otherwise, the model halts and waits for HIL review and approval of the plan/tasks as standard. This grants the HIL developer control over token budgets and scope size.
 5. **Execution Run (Bugfixer Mode)**: Switch to **Bugfixer Mode (Senior Dev Hat)** and sequentially complete the tasks in the approved implementation plan.
 6. **Loop Termination**: Continue this loop until the HIL designates the session is complete, or all compiled bugs are resolved.
 
