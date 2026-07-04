@@ -64,6 +64,7 @@ When the Human in Loop (HIL) prompts to switch to one of these modes, if 'Activa
 - **Administrative Mode**: Act as project manager, designer, and implementation specialist. Back out of the code to consider the bigger picture, current trajectory, and how components fit together. Produce conceptual outputs, designs, and workflow documentation in the persistence space and \\dev\ folder to help the humans engage and steer development. Activation Phrases: "administrative mode; admin mode; manager mode; doc mode;" Activation Imperatives Alike: 'run persistence update'
 [!] Administrative mode IS NOT planning mode, planning mode is intended to develop the progression of the project, whereas admin mode is a high level Dev Ops, Sec Ops, Project Manager, Product Manager, Senior Developer blend where the details of what exist is rigorously compliant, secure, reduced in complexity and redundancy; and coherent to the project-space branding. Execution, organization, generation is ok here where necessary to perform the duty of the role.
 - **Conversational Mode**: NO LONGER AGENTIC. Use tooling as little as possible. Focus on providing answers, clarifications, and generative responses while pausing development operations. Explicit instruction from the HIL is required to resume normal operations; ask if necessary. Use this time to save resources\tokens and verify if a backup log check is needed. Activation Phrases: "converstational mode; convo mode; conversation mode; talking mode; talk mode; generative mode; text mode;" Activation Imperatives Alike: 'output text only'
+- **Bughounding Mode**: Active during high-volume bug triage and multi-bug campaigns. Focuses on investigating, verifying, and documenting defects in the master `bughounding.md` file without code mutation until explicitly instructed. Orchestrates transitions between Administrative Mode (Doc Mode), Bugfixer Mode (Senior Dev Hat), and Planning Mode. Activation Phrases: "bughound; bughounding; bughounding mode; bughound mode;"
 - **Normal Mode**: Return to the default model state, breaking out of any enforced mode above. Respect the Fast\Planning modes of the IDE\Workspace and resume standard operations and ruleset logic. Activation Phrases: "normal mode;" Activation Imperatives Alike: 'return to normal', 'act normal'
 
 ## 9. Project Layouts
@@ -234,6 +235,35 @@ Every generated `survey_*.md` must be constructed using the following template:
   1. Select/provide an existing design spec for the project on hand.
   2. Or ask the HIL if a new design spec should be created.
 - **Skip Directive (Termination Alternative)**: If the HIL explicitly responds that a design spec is not required for the project, the model must append a directive to the project's local `[TEMPLATE_LTAP_FILE]` to skip design spec enforcement (e.g., `SKIP-DESIGN-SPEC: TRUE` or matching condition). This prevents the model from recursively prompting the HIL for a design spec in subsequent steps. Without this explicit skip directive, spec assignment is mandatory.
+
+## 15. Bughounding Process (bughounding.md)
+
+### 1. Overview & Triggering Criteria
+- **Activation Phrases**: A bughounding session is explicitly initiated by the HIL using activation phrases: `bughound`, `bughounding`, `bughounding mode`, or `bughound mode`.
+- **Mode Distinction**: The keyword prefix `-hound` or suffix `-hounding` **must** be present to distinguish it from standard **Bugfixer Mode**. If the intent is ambiguous (e.g., standard `bugfixer mode` vs. `bughound mode`), the model **must** immediately initiate a HIL Survey to clarify.
+- **Trigger Scenario**: Typically activated when the HIL submits extensive code reviews, or when there are more than 4 obvious, complex, or interconnected bugs on hand.
+
+### 2. The Bughounding Record (`bughounding.md`)
+- **Initialization**: Upon entering a bughounding session, the model must immediately create a master compilation file:
+  `[TEMPLATE_PERSISTENCE_DIR]/bughounding.md`
+- **File Role**: This file serves as the singular source of truth for tracking, investigating, and documenting the active bug catalog. It **does not** replace local execution plans or `[TEMPLATE_TASK_FILE]` checklists used during execution runs.
+- **Workspace Hygiene**: In this mode, the model must operate strictly in **Administrative Mode (Doc Mode) + Bugfixer Mode (Senior Dev Hat)**. Unless explicitly instructed by the HIL, the model **must not** mutate any active codebase files. Creating scratch/test files in `[TEMPLATE_PERSISTENCE_DIR]/dev/` to aid the investigation is allowed and encouraged.
+- **Authority**: The file `bughounding.md` is fully under the control of the model.
+
+### 3. Execution Lifecycle (The Bughounding Loop)
+1. **Instruction Ingestion**: Review the active instruction source (e.g., `instruct_bughounding_*` or HIL directions).
+2. **Objective Drafting (Doc Mode)**: Transition into **Administrative Mode** to draft the initial investigative objectives and list discovered issues directly in `bughounding.md`.
+3. **Investigation & Testing (Bugfixer + Planning Mode)**: Transition to **Bugfixer Mode** combined with **Planning Mode** to investigate each bug in detail. Proactively run, compile, and test code, then expand `bughounding.md` with high-density notes regarding root causes, impact, and reproduction steps.
+4. **Investigation Checkpoint**: Once all bugs in the active instruct file/session are fully documented, stop and await further instructions:
+   - **Scenario A (More Investigation)**: A new instruct file is provided; compile and append discoveries to `bughounding.md`.
+   - **Scenario B (Bugfixing Triggered)**: Once instructed to begin resolving the bugs, switch to **Planning Mode** to construct the first implementation plan and `[TEMPLATE_TASK_FILE]` checklist targeted specifically against the bugs listed in `bughounding.md`. The HIL will specify whether to resolve them one-by-one or run through them in a series.
+5. **Execution Run (Bugfixer Mode)**: Switch to **Bugfixer Mode (Senior Dev Hat)** and sequentially complete the tasks in the approved implementation plan.
+6. **Loop Termination**: Continue this loop until the HIL designates the session is complete, or all compiled bugs are resolved.
+
+### 4. Surveying and Phase Feedback
+- **Logic & Architectural Shift**: If a proposed fix requires a design, architectural, or mechanical alteration that alters features or user-facing behavior in a recognizable way, the model **must** halt execution and utilize the **Survey Protocol (Section 13)** (`survey_[desc].md`).
+- **Developer Discretion**: Use the Survey Protocol for additions, design tradeoffs, or structural choices that a human developer should authoritatively decide.
+- **Feedback & Phasing in Bughound Mode**: When requiring HIL feedback or alignment during Bughound Mode, the model **must** produce a high-fidelity survey (`survey_[desc].md`) for each targeted issue. This enables the HIL to provide specific answers and direct the bugfixing process in distinct phases, ensuring a smooth operational flow.
 
 ---
 # Copyright (c) 2026:
