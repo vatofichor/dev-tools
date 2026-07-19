@@ -291,5 +291,5 @@ Every generated `survey_*.md` must be constructed using the following template:
 
 ---
 # Copyright (c) 2026:
-# vatofichor - Sebastian Mass     [>_<]
+# vatofichor - Sebastian Mass&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[>_<]
 # & Assisted By Gemini Antigravity /|\
