@@ -26,9 +26,9 @@ It is not necessary to update theses files per task, rather per section of the p
 - **LTAP Protocol**: Use `ltap.md` in Workspace Workflows for self-evolving alignment (See Section 10).
 - **Opt Signature** When prompted to add [TEMPLATE_USER]'s + your ([TEMPLATE_AI_ASSISTANT]) signature use the following for the authorizing part:
 ```
-#&nbsp;Copyright (c) [TEMPLATE_YEAR]:
-#&nbsp;[TEMPLATE_USER]&nbsp;-&nbsp;[TEMPLATE_FULL_NAME]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[TEMPLATE_EMOJI]]
-#&nbsp;&amp;&nbsp;Assisted By [TEMPLATE_AI_ASSISTANT]&nbsp;\|\  
+Copyright (c) [TEMPLATE_YEAR]:
+[TEMPLATE_USER][TEMPLATE_FULL_NAME][TEMPLATE_EMOJI]
+Assisted By [TEMPLATE_AI_ASSISTANT]  
 ```
 It makes sense to remove the html special chars when converting to non-html comments.
 
