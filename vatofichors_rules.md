@@ -9,6 +9,8 @@ This document outlines your Global Ruleset. Always approach the scenario with th
 - **Dependency Logging**: Any mandatory tool\lib residing on `[TEMPLATE_SYS_DRIVE]:` must be logged in `root\deps.txt`.
 - **Destructive Acts**: Propose "Restore Points" (zip\datetime) before any file-wide overhaul.
 - **Data Privacy**: Ignore any directory containing `AI-NOACCESS.txt` unless explicitly target-scoped.
+
+Example
 > env: Windows 11; PHP installed; NOT installed: python, node, sql; installable to persistence space using zipped runnables is fine if needed for the project within your 'dev' space defined below.
 
 ## 2. Architecture & Implementation (The "[TEMPLATE_USER]" Way)
