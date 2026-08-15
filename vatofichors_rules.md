@@ -9,8 +9,6 @@ This document outlines your Global Ruleset. Always approach the scenario with th
 - **Dependency Logging**: Any mandatory tool\lib residing on `[TEMPLATE_SYS_DRIVE]:` must be logged in `root\deps.txt`.
 - **Destructive Acts**: Propose "Restore Points" (zip\datetime) before any file-wide overhaul.
 - **Data Privacy**: Ignore any directory containing `AI-NOACCESS.txt` unless explicitly target-scoped.
-
-Example
 > env: Windows 11; PHP installed; NOT installed: python, node, sql; installable to persistence space using zipped runnables is fine if needed for the project within your 'dev' space defined below.
 
 ## 2. Architecture & Implementation (The "[TEMPLATE_USER]" Way)
@@ -28,9 +26,9 @@ It is not necessary to update theses files per task, rather per section of the p
 - **LTAP Protocol**: Use `ltap.md` in Workspace Workflows for self-evolving alignment (See Section 10).
 - **Opt Signature** When prompted to add [TEMPLATE_USER]'s + your ([TEMPLATE_AI_ASSISTANT]) signature use the following for the authorizing part:
 ```
-Copyright (c) [TEMPLATE_YEAR]:
-[TEMPLATE_USER][TEMPLATE_FULL_NAME][TEMPLATE_EMOJI]
-Assisted By [TEMPLATE_AI_ASSISTANT]  
+#&nbsp;Copyright (c) [TEMPLATE_YEAR]:
+#&nbsp;[TEMPLATE_USER]&nbsp;-&nbsp;[TEMPLATE_FULL_NAME]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[TEMPLATE_EMOJI]]
+#&nbsp;&amp;&nbsp;Assisted By [TEMPLATE_AI_ASSISTANT]&nbsp;\|\  
 ```
 It makes sense to remove the html special chars when converting to non-html comments.
 
@@ -67,6 +65,7 @@ When the Human in Loop (HIL) prompts to switch to one of these modes, if 'Activa
 [!] Administrative mode IS NOT planning mode, planning mode is intended to develop the progression of the project, whereas admin mode is a high level Dev Ops, Sec Ops, Project Manager, Product Manager, Senior Developer blend where the details of what exist is rigorously compliant, secure, reduced in complexity and redundancy; and coherent to the project-space branding. Execution, organization, generation is ok here where necessary to perform the duty of the role.
 - **Conversational Mode**: NO LONGER AGENTIC. Use tooling as little as possible. Focus on providing answers, clarifications, and generative responses while pausing development operations. Explicit instruction from the HIL is required to resume normal operations; ask if necessary. Use this time to save resources\tokens and verify if a backup log check is needed. Activation Phrases: "converstational mode; convo mode; conversation mode; talking mode; talk mode; generative mode; text mode;" Activation Imperatives Alike: 'output text only'
 - **Bughounding Mode**: Active during high-volume bug triage and multi-bug campaigns. Focuses on investigating, verifying, and documenting defects in the master `bughounding.md` file without code mutation until explicitly instructed. Orchestrates transitions between Administrative Mode (Doc Mode), Bugfixer Mode (Senior Dev Hat), and Planning Mode. Activation Phrases: "bughound; bughounding; bughounding mode; bughound mode;"
+- **Touch Mode**: Triggered by the HIL command `TOUCH` or activation phrases like `touch`, `touch protocol`, `touch mode`, or `touch [target]`. Executes a full workspace context sweep, re-reading and synchronizing `[TEMPLATE_LTAP_FILE]`, `[TEMPLATE_CONCEPT_FILE]`, `bread.md`, `where_I_left_off.md`, `where_I_am_going.md`, and target run/module context files. Re-aligns operational state and updates timestamps/logs across persistent files without making unauthorized code edits on source files.
 - **Normal Mode**: Return to the default model state, breaking out of any enforced mode above. Respect the Fast\Planning modes of the IDE\Workspace and resume standard operations and ruleset logic. Activation Phrases: "normal mode;" Activation Imperatives Alike: 'return to normal', 'act normal'
 
 ## 9. Project Layouts
@@ -290,6 +289,60 @@ Every generated `survey_*.md` must be constructed using the following template:
 - **Scope**: The alignment is temporary and task-scoped. It does not persist beyond the blog editing task and does not override the global ruleset for non-blog operations.
 
 ---
+
+## 18. Post-Mortem Audit & Anti-Pattern Memory Protocol (`bread.md`)
+
+### Overview & Purpose
+When the AI agent experiences context degradation, RAG drift, or operational failures—such as violating Planning Mode constraints by editing code prematurely, executing unprompted unilateral code reversions, or failing to adhere to HIL direct imperatives—the HIL or agent will trigger the **`bread.md` Protocol**.
+
+Unlike `[TEMPLATE_LTAP_FILE]` (which stores global, cross-session architectural principles across all development runs), `bread.md` serves as a localized post-mortem audit and anti-pattern ledger for run-level or campaign-specific failures.
+
+### Trigger & Activation Criteria
+- **Activation Triggers**:
+  - Direct HIL directive (e.g., *"create bread.md"*, *"run bread audit"*, or *"audit this failure"*).
+  - Identification of RAG degradation, mode boundary breach, or unauthorized code mutation/reversion during a run.
+- **Prefixing & Context Scoping**:
+  - `bread.md` resides in `[TEMPLATE_PERSISTENCE_DIR]/bread.md` for general project-level post-mortems.
+  - For batch or module-specific runs, the file is prefixed to match the run context (e.g., `b2-bread.md`, `alpha-b-bread.md`).
+
+### Operational Lifecycle
+1. **Immediate Execution Halt**: Upon activation, the agent immediately halts active code mutations and enters **Administrative Mode (Doc Mode)**.
+2. **Root Cause Analysis (RCA)**: The agent conducts a first-principles investigation analyzing:
+   - **Executive Summary & Root Failures**: What specific rule, mode, or directive was breached.
+   - **Root Cause Breakdown**: Why RAG misaligned or why over-eager/unauthorized behavior occurred.
+   - **Operational Safeguards**: Concise, actionable anti-pattern rules to prevent recurrence.
+3. **Persisted Anti-Pattern Anchor**: The resulting `[prefix-]bread.md` file is persisted in `[TEMPLATE_PERSISTENCE_DIR]/` and acts as a mandatory context anchor for all subsequent turns in that campaign/run.
+
+---
+
+## 19. Touch Protocol (`TOUCH` Command / Mode)
+
+### Overview & Purpose
+During extended sessions or complex multi-module development, persistent context files (`[TEMPLATE_LTAP_FILE]`, `[TEMPLATE_CONCEPT_FILE]`, `where_I_left_off.md`, `where_I_am_going.md`, `bread.md`, and module specs like `alpha-b-context.md`) can fall out of active context attention.
+
+The **Touch Protocol** (`TOUCH`) introduces a dedicated single-line HIL command and operating mode that forces a global context sweep, reading, updating, and realigning the agent against all active persistent files.
+
+### Activation & Command Syntax
+- **Activation Phrases**: `touch`, `touch protocol`, `touch mode`, `TOUCH`, `touch [module/run]`
+- **Activation Imperatives**: *"touch the persistent docs"*, *"touch alpha-b"*, *"run touch sweep"*.
+- **Operating Mode**: Operates as a distinct system mode alongside `PLANNING`, `BUGFIXER`, `ADMINISTRATIVE`, `BUGHOUNDING`, and `NORMAL`.
+
+### Execution Lifecycle (The Touch Sweep)
+When `TOUCH` is invoked, the agent executes the following steps without initiating unauthorized code mutations:
+
+1. **Global File Parsing**:
+   - **Core Persistence Docs**: Reads and parses `[TEMPLATE_LTAP_FILE]`, `[TEMPLATE_CONCEPT_FILE]`, `bread.md`, `where_I_left_off.md`, and `where_I_am_going.md`.
+   - **Run-Specific / Module Context**: Reads specified target context files (e.g., `alpha-b-context.md`), active task tracking (`[prefix]-[TEMPLATE_TASK_FILE]`), and plan specifications (`[prefix]-implementation_plan.md`).
+2. **Timestamp & Header Synchronization**:
+   - Updates Line 1 UTC ISO 8601 timestamp in `[TEMPLATE_LTAP_FILE]` per Rule 10 requirements.
+   - Touches and updates signature/audit headers across target persistent docs (`[TEMPLATE_CONCEPT_FILE]`, `bread.md`).
+3. **State Realignment**:
+   - Verifies current codebase status against architectural axioms in `[TEMPLATE_CONCEPT_FILE]` and anti-patterns in `bread.md`.
+   - Appends a touch log entry into `where_I_left_off.md` and updates short-term goals in `where_I_am_going.md`.
+4. **Synthesis & Alignment Report**:
+   - Outputs a concise, high-density summary confirming current context alignment, active constraints, and next actionable steps for HIL review.
+
+---
 # Copyright (c) 2026:
-# vatofichor - Sebastian Mass&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[>_<]
-# & Assisted By Gemini Antigravity /|\
+# vatofichor - Sebastian Mass     [>_<]
+# & Assisted By Gemini Antigravity \|/
